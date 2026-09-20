@@ -6,7 +6,7 @@
 <title>Lola Thomas — Martech &amp; Growth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Pixelify+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #FAF7F2;
@@ -195,6 +195,63 @@
   /* CONTACT */
   .contact-row{ display:flex; flex-wrap:wrap; gap: 12px; margin-top: 22px; }
 
+  /* CORE WORKSTREAMS */
+  .ws-row{
+    display:flex; align-items:center; gap: 36px;
+    padding: 34px 0; border-top: 1px solid var(--border);
+  }
+  .ws-row:first-of-type{ border-top: none; padding-top: 6px; }
+  .ws-graphic{
+    flex: 0 0 260px;
+    height: 190px;
+    background: #FFFFFF;
+    border: 2px solid var(--text);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    background-image: radial-gradient(circle, #E7E2D8 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+  .ws-copy{ flex: 1; min-width: 0; }
+  .ws-copy h3{ font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0 0 10px; }
+  .ws-copy p{ font-size: 16px; color: var(--text-dim); margin: 0 0 12px; max-width: 62ch; }
+  .ws-copy p:last-child{ margin-bottom: 0; }
+
+  /* Martech graphic: dev-tools mock */
+  .dt-mock{ padding: 10px 12px; font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; }
+  .dt-head{ display:flex; gap: 5px; margin-bottom: 10px; }
+  .dt-dot{ width: 8px; height: 8px; border-radius: 50%; }
+  .dt-row{
+    display:flex; align-items:center; gap: 8px;
+    font-size: 10.5px; padding: 4px 0;
+    opacity: 0; transform: translateX(-8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    border-bottom: 1px dashed #E7E2D8;
+  }
+  .ws-graphic.in-view .dt-row{ opacity: 1; transform: translateX(0); }
+  .ws-graphic.in-view .dt-row:nth-child(2){ transition-delay: 0.15s; }
+  .ws-graphic.in-view .dt-row:nth-child(3){ transition-delay: 0.35s; }
+  .ws-graphic.in-view .dt-row:nth-child(4){ transition-delay: 0.55s; }
+  .ws-graphic.in-view .dt-row:nth-child(5){ transition-delay: 0.75s; }
+  .dt-method{ font-weight: 700; width: 30px; flex-shrink:0; }
+  .dt-method.get{ color: #2563EB; }
+  .dt-method.post{ color: var(--accent); }
+  .dt-path{ color: var(--text); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .dt-status{ color: #1D9A5C; font-weight:700; flex-shrink:0; }
+
+  /* SVG sketch draw-in */
+  .sketch-path{
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    transition: stroke-dashoffset 1.1s ease;
+  }
+  .ws-graphic.in-view .sketch-path{ stroke-dashoffset: 0; }
+  .ws-graphic.in-view .sketch-path.delay2{ transition-delay: 0.35s; }
+  .fade-in-el{ opacity: 0; transition: opacity 0.5s ease; }
+  .ws-graphic.in-view .fade-in-el{ opacity: 1; }
+  .ws-graphic.in-view .fade-in-el.delay-band{ transition-delay: 1.1s; }
+  .ws-graphic.in-view .fade-in-el.delay-labels{ transition-delay: 1.3s; }
+
   /* FOOTER */
   footer{ border-top: 1px solid var(--border); padding: 40px 0 34px; }
   .footer-grid{
@@ -218,6 +275,8 @@
     .footer-grid{ grid-template-columns: 1fr 1fr; }
     .focus-row{ align-items: flex-start; }
     .focus-desc{ text-align:left; }
+    .ws-row{ flex-direction: column; align-items: stretch; gap: 18px; }
+    .ws-graphic{ flex: none; width: 100%; }
   }
 </style>
 </head>
@@ -228,6 +287,7 @@
     <div class="nav-name">Lola Thomas</div>
     <nav class="nav-links">
       <a href="#work">Work</a>
+      <a href="#workstreams">How I work</a>
       <a href="#toolkit">Toolkit</a>
       <button class="copy-btn" id="copy-email-nav"><span class="dot"></span><span class="copy-label">Copy email</span></button>
     </nav>
@@ -239,7 +299,7 @@
   <section class="hero">
     <p class="kicker">Martech &amp; Growth</p>
     <h1>I help media businesses choose the right technology, then prove it's working.</h1>
-    <p class="lead">Manager, Experimentation &amp; Analytics at In Digital, currently on secondment inside the Financial Times' Performance and Marketing Technology team. My work sits across platform &amp; vendor strategy, analytics and CDPs, and the experimentation that tells you if any of it is actually paying off.</p>
+    <p class="lead">Manager, Experimentation &amp; Analytics at In Digital, currently on secondment inside the Financial Times' paywall team. My work sits across platform &amp; vendor strategy, analytics and CDPs, and the experimentation that tells you if any of it is actually paying off.</p>
     <div class="cta-row">
       <a class="btn btn-primary" id="cv-download" href="lola_t_cv.pdf" download="lola_t_cv.pdf">Download CV</a>
     </div>
@@ -261,9 +321,74 @@
     <p class="block-kicker">Background</p>
     <h2>About</h2>
     <p>I'm a data-driven, commercially-minded martech professional. My career started with an engineering degree, which gave me a technical foundation I carried straight into <strong>In Digital</strong>, where that technical acumen grew fast, helping clients set up paywall platforms and understand the best ways to measure success and optimise their product stack.</p>
-    <p>That grounding shaped how I approached experimentation: it wasn't just about running tests, it was about validating what actually moved the needle for users and, in turn, grew our clients' customer bases. That meant getting comfortable with complex analysis, including LTV modelling, ad revenue balance, business forecasting and deep consumer insight, and using it to understand the full user lifecycle: everything from before a user lands on-site, through their on-site journey, to conversion and retention.</p>
-    <p>That breadth of experience opened the door to a secondment inside the <strong>Financial Times</strong>, where I now lead the AI Paywall workstream, setting strategy for how the AI paywall model drives commercial growth, which means going deep on both strategy and the mechanics of reinforcement learning.</p>
-    <p>Today my work spans the full user lifecycle: selecting and vetting products and vendors to build the right tech and data stack, setting the strategy for how platforms are used, and making sure every platform in that stack earns its keep, tracking ROI and running the experimentation programmes that prove commercial impact. What ties it together is a long-standing interest in how numbers and data explain user behaviour, and how that understanding drives commercial growth. That gives me a rounded skill set across analytics, technical implementation, strategy and user growth.</p>
+    <p>That grounding shaped how I approached experimentation: it wasn't just about running tests, it was about validating what actually moved the needle for users, and, in turn, grew our clients' customer bases across the full user lifecycle, from before someone lands on-site through to conversion and retention.</p>
+    <p>That breadth of experience opened the door to a secondment inside the <strong>Financial Times</strong>, where I now lead the AI Paywall workstream, setting strategy for how the model drives commercial growth.</p>
+    <p>Today my work spans the full user lifecycle: selecting and vetting the right products and vendors, setting platform strategy, and making sure everything in that stack earns its keep. What ties it together is a long-standing interest in how numbers and data explain user behaviour, and how that understanding drives commercial growth.</p>
+  </section>
+
+  <section class="block" id="workstreams">
+    <p class="block-kicker">How I work</p>
+    <h2>Core workstreams</h2>
+    <p class="section-intro">Three lenses I bring to every project, from wiring up the tech stack to proving what actually moved the numbers.</p>
+
+    <div class="ws-row">
+      <div class="ws-graphic" id="ws-martech">
+        <div class="dt-mock">
+          <div class="dt-head">
+            <span class="dt-dot" style="background:#FF5F57"></span>
+            <span class="dt-dot" style="background:#FEBC2E"></span>
+            <span class="dt-dot" style="background:#28C840"></span>
+          </div>
+          <div class="dt-row"><span class="dt-method get">GET</span><span class="dt-path">/entitlement-check</span><span class="dt-status">200</span></div>
+          <div class="dt-row"><span class="dt-method post">POST</span><span class="dt-path">/paywall-config</span><span class="dt-status">200</span></div>
+          <div class="dt-row"><span class="dt-method get">GET</span><span class="dt-path">/user/ltv-score</span><span class="dt-status">200</span></div>
+          <div class="dt-row"><span class="dt-method post">POST</span><span class="dt-path">/decision-engine</span><span class="dt-status">200</span></div>
+          <div class="dt-row"><span class="dt-method get">GET</span><span class="dt-path">/render-offer</span><span class="dt-status">200</span></div>
+        </div>
+      </div>
+      <div class="ws-copy">
+        <h3>Martech</h3>
+        <p>I've helped clients with platform integration, which gave me a strong grasp of how tech stacks and websites actually work under the hood, including request flow and the order API calls need to happen in for systems to run efficiently.</p>
+        <p>I also have a solid understanding of AI and reinforcement learning: how data from the web layer fed into the model, how it reacted and learned, and how it turned that into commercial decisions. That meant evaluating what the model was receiving and studying its behaviour to reduce model drift, and optimising how it sat within the tech stack to protect platform ROI.</p>
+        <p>I helped run a data migration for one client, outlining requirements and tagging user interactions so meaningful data was captured for attribution and a stronger marketing function. I've also helped build AI agents to automate work for colleagues.</p>
+      </div>
+    </div>
+
+    <div class="ws-row">
+      <div class="ws-graphic" id="ws-data">
+        <svg viewBox="0 0 260 190" width="100%" height="100%">
+          <line x1="30" y1="150" x2="240" y2="150" stroke="var(--text)" stroke-width="1.5" stroke-opacity="0.6" class="fade-in-el"/>
+          <line x1="30" y1="150" x2="30" y2="20" stroke="var(--text)" stroke-width="1.5" stroke-opacity="0.6" class="fade-in-el"/>
+          <path d="M30,140 C70,130 110,110 150,90 C180,75 210,55 235,35" fill="none" stroke="var(--text)" stroke-width="2.5" class="sketch-path"/>
+          <path d="M30,145 C70,142 110,132 150,120 C180,110 210,95 235,80" fill="none" stroke="var(--accent)" stroke-width="2.5" class="sketch-path delay2"/>
+          <text x="150" y="28" font-size="10" fill="var(--text)" class="fade-in-el delay-labels" font-family="ui-monospace, monospace">Registration</text>
+          <text x="150" y="132" font-size="10" fill="var(--accent)" class="fade-in-el delay-labels" font-family="ui-monospace, monospace">Ad revenue</text>
+        </svg>
+      </div>
+      <div class="ws-copy">
+        <h3>Data</h3>
+        <p>I've run numerous LTV analyses to understand how to optimise user revenue, and built models to reflect business performance, weighing up different revenue levers against each other. That's included building business performance and trading dashboards, and running in-depth analysis into opportunity areas to help drive acquisition. I'm comfortable with forecasting and modelling more broadly, using it to turn raw numbers into decisions the business could act on.</p>
+      </div>
+    </div>
+
+    <div class="ws-row">
+      <div class="ws-graphic" id="ws-experimentation">
+        <svg viewBox="0 0 260 190" width="100%" height="100%">
+          <line x1="20" y1="155" x2="245" y2="155" stroke="var(--text)" stroke-width="1.5" stroke-opacity="0.6" class="fade-in-el"/>
+          <rect x="105" y="25" width="55" height="130" fill="var(--accent)" fill-opacity="0.14" class="fade-in-el delay-band"/>
+          <line x1="105" y1="25" x2="105" y2="155" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 3" class="fade-in-el delay-band"/>
+          <line x1="160" y1="25" x2="160" y2="155" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 3" class="fade-in-el delay-band"/>
+          <path d="M20,150 C55,150 65,30 132,30 C199,30 210,150 245,150" fill="none" stroke="var(--text)" stroke-width="2.5" class="sketch-path"/>
+          <text x="108" y="18" font-size="10" fill="var(--accent)" class="fade-in-el delay-labels" font-family="ui-monospace, monospace">95% CI</text>
+        </svg>
+      </div>
+      <div class="ws-copy">
+        <h3>Experimentation</h3>
+        <p>I've run experimentation across numerous B2C clients to optimise conversion, covering creative and UI/UX testing, access and sampling testing, and pricing, offer and messaging testing to understand what actually drove onward conversion. This work included building one of the most optimised subscription funnels I've worked on.</p>
+        <p>I own experimentation roadmaps end-to-end, from ideation through to hypothesis creation, roadmap setting, test builds, deployment and QA. Once a test has run, I lead the post-test analysis to understand the potential impact and uplift, and assess it as an optimisation.</p>
+      </div>
+    </div>
+
   </section>
 
   <section class="block" id="work">
@@ -332,27 +457,6 @@
           <div class="row">
             <p class="label">Outcome</p>
             <p class="val">Reshaped how The Independent weighed subscription growth against advertising monetisation, with a model rather than a hunch behind the decision.</p>
-          </div>
-        </div>
-      </details>
-
-      <details class="work-row">
-        <summary>
-          <div class="work-row-main">
-            <p class="work-tag">In Digital · Internal AI enablement</p>
-            <p class="work-title">Building AI agents to ease team workload</p>
-          </div>
-          <span class="work-arrow">→</span>
-        </summary>
-        <div class="work-body">
-          <p class="problem">Colleagues across In Digital were spending significant time on repetitive, manual tasks with no tooling built to take the load off.</p>
-          <div class="row">
-            <p class="label">Approach</p>
-            <p class="val">Built AI agents to automate parts of that workload, and focused on building the wider team's AI skills so the tools could actually be adopted day-to-day rather than just handed over.</p>
-          </div>
-          <div class="row">
-            <p class="label">Outcome</p>
-            <p class="val">Freed up colleagues' time for higher-value work, and helped build a more AI-literate team.</p>
           </div>
         </div>
       </details>
@@ -455,7 +559,7 @@
     <div class="contact-row">
       <button class="btn btn-primary" id="copy-email-contact" style="border:none; cursor:pointer; font-family: var(--sans);">Copy email</button>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/lola-thomas-3260001a5/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-ghost" id="cv-download-2" href="lola_t_cv.pdf" download="lola_t_cv.pdf">Download CV</a>
+     <a class="btn btn-ghost" id="cv-download-2" href="lola_t_cv.pdf" download="lola_t_cv.pdf">Download CV</a>
     </div>
   </section>
 
@@ -468,6 +572,7 @@
         <p class="f-title">Pages</p>
         <a href="#work">Work</a>
         <a href="#about">About</a>
+        <a href="#workstreams">How I work</a>
         <a href="#toolkit">Toolkit</a>
         <a href="#contact">Contact</a>
       </div>
@@ -478,7 +583,7 @@
       </div>
       <div class="footer-col">
         <p class="f-title">CV</p>
-        <a href="lola_t_cv.pdf" id="cv-download-3" download="lola_t_cv.pdf">Download CV</a>
+       <a href="lola_t_cv.pdf" id="cv-download-3" download="lola_t_cv.pdf">Download CV</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -489,6 +594,7 @@
 </footer>
 
 <script>
+
   function copyEmail(btn, originalText){
     navigator.clipboard.writeText('lolatthomas@outlook.com').then(() => {
       const label = btn.querySelector('.copy-label') || btn;
@@ -499,6 +605,22 @@
   }
   document.getElementById('copy-email-nav').addEventListener('click', function(){ copyEmail(this); });
   document.getElementById('copy-email-contact').addEventListener('click', function(){ copyEmail(this); });
+
+  // Trigger workstream graphic animations once each scrolls into view
+  const wsGraphics = document.querySelectorAll('.ws-graphic');
+  if ('IntersectionObserver' in window){
+    const wsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          wsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    wsGraphics.forEach(el => wsObserver.observe(el));
+  } else {
+    wsGraphics.forEach(el => el.classList.add('in-view'));
+  }
 </script>
 
 </body>
